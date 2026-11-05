@@ -1,0 +1,121 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+html[data-palette="amethyst-violet"] {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-arabic: 'Cairo', system-ui, -apple-system, sans-serif;
+  
+  --palette-50: #f5f3ff;
+  --palette-100: #ede9fe;
+  --palette-200: #ddd6fe;
+  --palette-300: #c4b5fd;
+  --palette-400: #a78bfa;
+  --palette-500: #8b5cf6;
+  --palette-600: #7c3aed;
+  --palette-700: #6d28d9;
+  --palette-800: #5b21b6;
+  --palette-900: #4c1d95;
+
+  --palette-primary: #8B5CF6;
+  --palette-primary-hover: #7C3AED;
+  --palette-light: #EDE9FE;
+  --palette-glow-1: rgba(139, 92, 246, 0.22);
+  --palette-glow-2: rgba(192, 132, 252, 0.16);
+  --palette-glow-3: rgba(59, 130, 246, 0.12);
+  --palette-bg: #090714;
+  --palette-surface: #130F26;
+  --palette-border: rgba(139, 92, 246, 0.30);
+}
+
+html[data-palette="cyan-ocean"] {
+  --palette-50: #ecfeff;
+  --palette-100: #cffafe;
+  --palette-200: #a5f3fc;
+  --palette-300: #67e8f9;
+  --palette-400: #22d3ee;
+  --palette-500: #06b6d4;
+  --palette-600: #0891b2;
+  --palette-700: #0e7490;
+  --palette-800: #155e75;
+  --palette-900: #164e63;
+
+  --palette-primary: #06B6D4;
+  --palette-primary-hover: #0891B2;
+  --palette-light: #CFFAFE;
+  --palette-glow-1: rgba(6, 182, 212, 0.22);
+  --palette-glow-2: rgba(20, 184, 166, 0.16);
+  --palette-glow-3: rgba(56, 189, 248, 0.12);
+  --palette-bg: #040E17;
+  --palette-surface: #0A1C2C;
+  --palette-border: rgba(6, 182, 212, 0.30);
+}
+
+html[data-palette="rose-copper"] {
+  --palette-50: #fff1f2;
+  --palette-100: #ffe4e6;
+  --palette-200: #fecdd3;
+  --palette-300: #fda4af;
+  --palette-400: #fb7185;
+  --palette-500: #f43f5e;
+  --palette-600: #e11d48;
+  --palette-700: #be123c;
+  --palette-800: #9f1239;
+  --palette-900: #881337;
+
+  --palette-primary: #F43F5E;
+  --palette-primary-hover: #E11D48;
+  --palette-light: #FFE4E6;
+  --palette-glow-1: rgba(244, 63, 94, 0.22);
+  --palette-glow-2: rgba(251, 146, 60, 0.16);
+  --palette-glow-3: rgba(217, 70, 239, 0.12);
+  --palette-bg: #12060B;
+  --palette-surface: #220B15;
+  --palette-border: rgba(244, 63, 94, 0.30);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+body {
+  background-color: var(--palette-bg, #090714);
+  color: #F8FAFC;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--palette-bg, #090714);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--palette-surface, #130F26);
+  border-radius: 4px;
+  border: 1px solid var(--palette-border, rgba(139, 92, 246, 0.2));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--palette-500, #8b5cf6);
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(19, 15, 38, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-accent {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--palette-border, rgba(139, 92, 246, 0.25));
+}
