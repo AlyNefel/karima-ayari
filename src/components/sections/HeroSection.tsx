@@ -39,11 +39,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--palette-500)]/10 border border-amber-500/30 text-[var(--palette-400)] text-xs sm:text-sm font-semibold mb-8 shadow-inner shadow-[var(--palette-primary)]/10"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--palette-500)]/10 border border-[var(--palette-500)]/30 text-[var(--palette-400)] text-xs sm:text-sm font-semibold mb-8 shadow-inner shadow-[var(--palette-primary)]/10"
         >
           <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: 'var(--palette-primary)' }} />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ backgroundColor: 'var(--palette-primary)' }} />
           </span>
           <Sparkles className="w-3.5 h-3.5 text-[var(--palette-primary)]" />
           <span>{t.hero.badge}</span>
@@ -90,7 +90,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Canadian CV Download Trigger */}
           <button
             onClick={onOpenCvModal}
-            className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[var(--palette-primary)] via-amber-400 to-amber-500 text-slate-950 font-extrabold text-sm shadow-xl shadow-[var(--palette-primary)]/25 hover:shadow-[var(--palette-primary)]/40 hover:scale-105 active:scale-95 transition-all duration-300"
+            className="flex items-center gap-2.5 px-6 py-3.5 rounded-2xl text-white font-extrabold text-sm shadow-xl hover:scale-105 active:scale-95 transition-all duration-300" style={{ background: 'linear-gradient(135deg, var(--palette-primary), var(--palette-600))', boxShadow: '0 8px 25px var(--palette-glow-1, rgba(139,92,246,0.3))' }}
           >
             <FileDown className="w-4 h-4" />
             <span>{t.hero.ctaCv}</span>
@@ -126,7 +126,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {personalInfo.stats.map((st) => (
             <div
               key={st.id}
-              className="p-5 rounded-2xl bg-surface-900/60 border border-slate-800/80 backdrop-blur-md hover:border-amber-500/40 transition-all duration-300 text-center group"
+              className="p-5 rounded-2xl bg-surface-900/60 border border-slate-800/80 backdrop-blur-md hover:border-[var(--palette-500)]/40 transition-all duration-300 text-center group"
             >
               <div className="text-3xl sm:text-4xl font-black text-white group-hover:text-[var(--palette-primary)] transition-colors">
                 {st.value}
