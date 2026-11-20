@@ -87,13 +87,17 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ data, lang
                   >
                     <div>
                       <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                        <span className="px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-bold">
-                          {exp.company[lang]}
-                        </span>
-                        <span className="flex items-center gap-1 text-xs text-slate-400">
-                          <MapPin className="w-3.5 h-3.5 text-slate-500" />
-                          {exp.location[lang]}
-                        </span>
+                        {exp.company?.[lang] && (
+                          <span className="px-2.5 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-bold">
+                            {exp.company[lang]}
+                          </span>
+                        )}
+                        {exp.location?.[lang] && (
+                          <span className="flex items-center gap-1 text-xs text-slate-400">
+                            <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                            {exp.location[lang]}
+                          </span>
+                        )}
                       </div>
                       <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
                         {exp.title[lang]}
@@ -101,10 +105,12 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ data, lang
                     </div>
 
                     <div className="flex items-center justify-between md:justify-end gap-3 shrink-0">
-                      <span className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-300 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/60">
-                        <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                        {exp.period[lang]}
-                      </span>
+                      {exp.period?.[lang] && (
+                        <span className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-300 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/60">
+                          <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                          {exp.period[lang]}
+                        </span>
+                      )}
 
                       <div className={`p-1.5 rounded-lg bg-slate-800 text-slate-400 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-amber-400' : ''}`}>
                         <ChevronDown className="w-4 h-4" />
@@ -112,7 +118,7 @@ export const ExperienceSection: React.FC<ExperienceSectionProps> = ({ data, lang
                     </div>
                   </div>
 
-                  {exp.description && (
+                  {exp.description?.[lang] && (
                     <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
                       {exp.description[lang]}
                     </p>

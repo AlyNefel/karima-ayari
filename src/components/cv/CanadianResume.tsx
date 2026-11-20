@@ -205,9 +205,9 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
       <div style="margin-bottom:10px;line-height:1.3;font-size:8.5pt;">
         <div style="display:flex;justify-content:space-between;font-weight:700;font-size:9pt;color:#111827;">
           <span>${exp.title[lang] ?? ''}</span>
-          <span dir="ltr" style="white-space:nowrap;">[${exp.period[lang] ?? ''}]</span>
+          ${exp.period?.[lang] ? `<span dir="ltr" style="white-space:nowrap;">[${exp.period[lang]}]</span>` : ''}
         </div>
-        <div style="color:#374151;font-weight:600;margin-bottom:3px;">&bull; ${exp.company[lang] ?? ''} - ${exp.location[lang] ?? ''}</div>
+        ${[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).length ? `<div style="color:#374151;font-weight:600;margin-bottom:3px;">&bull; ${[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).join(' - ')}</div>` : ''}
         <ul style="margin:0;padding-${isRtl ? 'right' : 'left'}:8px;color:#1F2937;list-style:none;">
           ${(exp.tasks[lang] ?? []).map(task => `<li style="margin-bottom:2px;">&bull; ${task}</li>`).join('')}
         </ul>
@@ -496,9 +496,11 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
                     <div key={exp.id} style={{ marginBottom: '8px', lineHeight: '1.3' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '9pt' }}>
                         <span>{exp.title[lang]}</span>
-                        <span dir="ltr" style={{ whiteSpace: 'nowrap' }}>[{exp.period[lang]}]</span>
+                        {exp.period?.[lang] && <span dir="ltr" style={{ whiteSpace: 'nowrap' }}>[{exp.period[lang]}]</span>}
                       </div>
-                      <div style={{ color: '#374151', fontWeight: 600, marginBottom: '2px' }}>• {exp.company[lang]} - {exp.location[lang]}</div>
+                      {[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).length > 0 && (
+                        <div style={{ color: '#374151', fontWeight: 600, marginBottom: '2px' }}>• {[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).join(' - ')}</div>
+                      )}
                       <ul style={{ listStyle: 'none', padding: 0, paddingInlineStart: '8px', color: '#1F2937' }}>
                         {exp.tasks[lang]?.map((task, tIdx) => (
                           <li key={tIdx} style={{ marginBottom: '1px' }}>• {task}</li>
@@ -532,9 +534,11 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
                     <div key={exp.id} style={{ marginBottom: '10px', lineHeight: '1.3' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '9pt' }}>
                         <span>{exp.title[lang]}</span>
-                        <span dir="ltr" style={{ whiteSpace: 'nowrap' }}>[{exp.period[lang]}]</span>
+                        {exp.period?.[lang] && <span dir="ltr" style={{ whiteSpace: 'nowrap' }}>[{exp.period[lang]}]</span>}
                       </div>
-                      <div style={{ color: '#374151', fontWeight: 600, marginBottom: '3px' }}>• {exp.company[lang]} - {exp.location[lang]}</div>
+                      {[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).length > 0 && (
+                        <div style={{ color: '#374151', fontWeight: 600, marginBottom: '3px' }}>• {[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).join(' - ')}</div>
+                      )}
                       <ul style={{ listStyle: 'none', padding: 0, paddingInlineStart: '8px', color: '#1F2937' }}>
                         {exp.tasks[lang]?.map((task, tIdx) => (
                           <li key={tIdx} style={{ marginBottom: '2px' }}>• {task}</li>

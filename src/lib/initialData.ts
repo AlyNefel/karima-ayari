@@ -6,55 +6,55 @@ export const initialPortfolioData: PortfolioData = {
   },
   personalInfo: {
     name: {
-      fr: 'Karima',
-      en: 'Karima',
-      ar: 'كريمة',
-      de: 'Karima',
+      "fr": "Karima",
+      "en": "Karima",
+      "ar": "كريمة",
+      "de": "Karima"
     },
     headline: {
-      fr: 'Consultante Polyvalente | Conseil, Organisation & Relations Clients',
-      en: 'Versatile Consultant | Consulting, Organization & Client Relations',
-      ar: 'مستشارة متعددة المهارات | الاستشارات، التنظيم وعلاقات العملاء',
-      de: 'Vielseitige Beraterin | Beratung, Organisation & Kundenbetreuung',
+      "fr": "Consultante Polyvalente | Conseil, Organisation & Relations Clients",
+      "en": "Versatile Consultant | Advisory, Organization & Client Relations",
+      "ar": "مستشارة متعددة الاختصاصات | الاستشارة، التنظيم وعلاقات العملاء",
+      "de": "Vielseitige Beraterin | Beratung, Organisation & Kundenbeziehungen"
     },
     tagline: {
-      fr: 'Excellence relationnelle, rigueur méthodologique et accompagnement sur-mesure',
-      en: 'Relational excellence, methodical rigor, and tailored client support',
-      ar: 'التميز في التواصل، الدقة المنهجية والمرافقة المصممة خصيصاً',
-      de: 'Kommunikationsstärke, methodische Präzision und maßgeschneiderte Begleitung',
+      "fr": "Excellence relationnelle, rigueur méthodologique et accompagnement sur-mesure",
+      "en": "Relational excellence, methodological rigor and tailor-made support",
+      "ar": "التميّز في العلاقات، الدقة المنهجية والمرافقة حسب الطلب",
+      "de": "Exzellenz in der Kundenbeziehung, methodische Sorgfalt und maßgeschneiderte Begleitung"
     },
     bio: {
-      fr: 'Professionnelle engagée et passionnée, spécialisée dans la gestion de projets, la coordination administrative et le conseil sur-mesure. À l’écoute et proactive, je mets mes compétences au service de vos objectifs.',
-      en: 'Dedicated and proactive professional specializing in project management, administrative coordination, and bespoke advisory. Committed to delivering results and tailored solutions.',
-      ar: 'محترفة شغوفة وملتزمة، متخصصة في إدارة المشاريع والتنسيق الإداري والاستشارات الموجهة. حريصة على تقديم حلول مخصصة تلبي تطلعاتكم وأهدافكم.',
-      de: 'Engagierte und proaktive Fachkraft, spezialisiert auf Projektmanagement, administrative Koordination und maßgeschneiderte Beratung. Stets darauf bedacht, zielorientierte Ergebnisse zu liefern.',
+      "fr": "Professionnelle engagée et passionnée, spécialisée dans la gestion de projets, la coordination administrative et le conseil sur-mesure. À l’écoute et proactive, je mets mes compétences au service de vos objectifs.",
+      "en": "A committed and passionate professional specializing in project management, administrative coordination and tailor-made consulting. Attentive and proactive, I put my skills at the service of your goals.",
+      "ar": "محترفة ملتزمة وشغوفة، متخصصة في إدارة المشاريع والتنسيق الإداري والاستشارات حسب الطلب. أُحسن الإصغاء وأتحلّى بروح المبادرة، وأضع مهاراتي في خدمة أهدافكم.",
+      "de": "Engagierte und leidenschaftliche Fachkraft mit Schwerpunkt auf Projektmanagement, administrativer Koordination und maßgeschneiderter Beratung. Aufmerksam und proaktiv stelle ich meine Kompetenzen in den Dienst Ihrer Ziele."
     },
     fullBio: {
-      fr: 'Forte d’un parcours diversifié alliant rigueur administrative, sens aigu du service et compétences analytiques, j’accompagne entreprises et particuliers dans l’optimisation de leurs processus et la réalisation de leurs projets. Disponible pour des missions de conseil, de coordination ou d’accompagnement stratégique, je m’adapte rapidement aux environnements exigeants avec enthousiasme et professionnalisme.',
-      en: 'With a versatile background combining administrative precision, client-centric service, and strategic problem-solving, I support organizations and individuals in optimizing workflows and executing ambitious projects. Adaptable, forward-thinking, and driven by excellence in every collaboration.',
-      ar: 'بفضل مسار مهني متنوع يجمع بين الانضباط الإداري، والحرص على جودة الخدمة، والقدرة التحليلية، أرافق المؤسسات والأفراد في تحسين الأداء وإنجاز مشاريعهم بنجاح مع مرونة وسرعة استيعاب عالية.',
-      de: 'Mit einem vielseitigen Werdegang, der administrative Genauigkeit, Kundenorientierung und strategische Problemlösung vereint, begleite ich Unternehmen und Einzelpersonen bei der Prozessoptimierung und erfolgreichen Projektumsetzung.',
+      "fr": "Forte d’un parcours diversifié alliant rigueur administrative, sens aigu du service et compétences analytiques, j’accompagne entreprises et particuliers dans l’optimisation de leurs processus et la réalisation de leurs projets. Disponible pour des missions de conseil, de coordination ou d’accompagnement stratégique, je m’adapte rapidement aux environnements exigeants avec enthousiasme et professionnalisme.",
+      "en": "Drawing on a diverse background that combines administrative rigor, a keen sense of service and analytical skills, I support companies and individuals in optimizing their processes and bringing their projects to life. Available for consulting, coordination or strategic support assignments, I adapt quickly to demanding environments with enthusiasm and professionalism.",
+      "ar": "بفضل مسار مهني متنوّع يجمع بين الدقة الإدارية وحسّ عالٍ بالخدمة ومهارات تحليلية، أرافق الشركات والأفراد في تحسين إجراءات عملهم وتحقيق مشاريعهم. متاحة لمهام الاستشارة أو التنسيق أو المرافقة الاستراتيجية، وأتأقلم بسرعة مع بيئات العمل المتطلّبة بحماس واحترافية.",
+      "de": "Dank eines vielseitigen Werdegangs, der administrative Sorgfalt, ausgeprägten Servicegedanken und analytische Fähigkeiten vereint, begleite ich Unternehmen und Privatpersonen bei der Optimierung ihrer Abläufe und der Umsetzung ihrer Projekte. Für Beratungs-, Koordinations- oder strategische Begleitungsaufträge verfügbar, passe ich mich mit Begeisterung und Professionalität schnell an anspruchsvolle Umgebungen an."
     },
-    email: 'contact.karima@gmail.com',
-    phone: '+216 50 000 000',
-    whatsapp: '21650000000',
+    email: "karima1ayari@gmail.com",
+    phone: "55418089",
+    whatsapp: "55418089",
     residence: {
-      fr: 'Tunis, Tunisie',
-      en: 'Tunis, Tunisia',
-      ar: 'تونس العاصمة، تونس',
-      de: 'Tunis, Tunesien',
+      "fr": "Tunis, Tunisie",
+      "en": "Tunis, Tunisia",
+      "ar": "تونس العاصمة، تونس",
+      "de": "Tunis, Tunesien"
     },
     nationality: {
-      fr: 'Tunisienne',
-      en: 'Tunisian',
-      ar: 'تونسية',
-      de: 'Tunesisch',
+      "fr": "Tunisienne",
+      "en": "Tunisian",
+      "ar": "تونسية",
+      "de": "Tunesisch"
     },
     availability: {
-      fr: 'Disponible immédiatement / Consultations en ligne et sur site',
-      en: 'Immediately Available / Online & On-site Consultations',
-      ar: 'متاحة فورياً / استشارات عبر الإنترنت وحضورياً',
-      de: 'Sofort verfügbar / Online- und Vor-Ort-Beratung',
+      "fr": "Disponible immédiatement / Consultations en ligne et sur site",
+      "en": "Available immediately / Online and on-site consultations",
+      "ar": "متاحة فوراً / استشارات عبر الإنترنت وفي الموقع",
+      "de": "Ab sofort verfügbar / Online- und Vor-Ort-Beratungen"
     },
     targetRole: {
       fr: 'Conseil, Coordination de Projets, Relation Client & Stratégie',
@@ -118,195 +118,473 @@ export const initialPortfolioData: PortfolioData = {
   },
   experiences: [
     {
-      id: 'exp-1',
-      title: {
-        fr: 'Consultante Indépendante & Coordinatrice de Projets',
-        en: 'Independent Consultant & Project Coordinator',
-        ar: 'مستشارة مستقلة ومنسقة مشاريع',
-        de: 'Freiberufliche Beraterin & Projektkoordinatorin',
+      "id": "exp-1",
+      "order": 1,
+      "category": "culinary",
+      "title": {
+        "fr": "Superviseure de cuisine",
+        "en": "Kitchen Supervisor",
+        "ar": "مشرفة مطبخ",
+        "de": "Küchenaufsicht"
       },
-      company: {
-        fr: 'Cabinet de Conseil & Projets Partenaires',
-        en: 'Advisory Firm & Partner Projects',
-        ar: 'مكتب استشارات ومشاريع شريكة',
-        de: 'Beratungsunternehmen & Partnerprojekte',
+      "company": {
+        "fr": "Hôtellerie",
+        "en": "Hotel Industry",
+        "ar": "قطاع الفندقة",
+        "de": "Hotellerie"
       },
-      location: {
-        fr: 'Tunis & Télétravail',
-        en: 'Tunis & Remote',
-        ar: 'تونس وعن بُعد',
-        de: 'Tunis & Remote',
+      "location": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
       },
-      period: {
-        fr: '2021 - Présent',
-        en: '2021 - Present',
-        ar: '2021 - حتى الآن',
-        de: '2021 - Heute',
+      "period": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
       },
-      order: 1,
-      category: 'management',
-      description: {
-        fr: 'Pilotage de missions d’accompagnement client, organisation d’événements et suivi rigoureux des livrables.',
-        en: 'Leading client engagement missions, event coordination, and deliverable quality assurance.',
-        ar: 'قيادة مهمات مرافقة الشركاء والعملاء وتنظيم الفعاليات ومتابعة مؤشرات الجودة.',
-        de: 'Leitung von Kundenberatungsprojekten, Veranstaltungsorganisation und Qualitätssicherung.',
-      },
-      tasks: {
-        fr: [
-          'Analyse des besoins et modélisation de parcours clients fluides et efficaces.',
-          'Coordination transversale entre intervenants, prestataires et équipes internes.',
-          'Mise en place d’outils de suivi, tableaux de bord et reporting hebdomadaire.',
+      "tasks": {
+        "fr": [
+          "Supervision des opérations quotidiennes de la cuisine et coordination des activités de préparation des repas.",
+          "Participation à la préparation des repas et au respect des normes de qualité alimentaire.",
+          "Soutien au service du petit-déjeuner et assistance aux clients pendant les heures du petit-déjeuner.",
+          "Respect des procédures d’hygiène et de sécurité alimentaire."
         ],
-        en: [
-          'Needs assessment and workflow optimization for enhanced client satisfaction.',
-          'Cross-functional coordination among stakeholders, partners, and teams.',
-          'Implementation of monitoring KPIs, dashboards, and executive reporting.',
+        "en": [
+          "Supervised daily kitchen operations and coordinated food preparation activities.",
+          "Assisted in preparing meals and ensuring food quality standards.",
+          "Supported breakfast service and assisted guests during breakfast hours.",
+          "Ensured compliance with hygiene and food safety procedures."
         ],
-        ar: [
-          'تحليل الاحتياجات وتصميم خطط عمل ميسرة تضمن الفعالية ورضا العملاء.',
-          'التنسيق الشامل بين مختلف الأطراف والشركاء وفرق العمل الميدانية.',
-          'إعداد لوحات القيادة والتقارير الدورية لقياس الأداء ومتابعة النتائج.',
+        "ar": [
+          "الإشراف على العمليات اليومية للمطبخ وتنسيق أنشطة تحضير الطعام.",
+          "المساعدة في إعداد الوجبات وضمان احترام معايير جودة الأغذية.",
+          "دعم خدمة الفطور ومساعدة النزلاء خلال أوقات الفطور.",
+          "ضمان الالتزام بإجراءات النظافة وسلامة الأغذية."
         ],
-        de: [
-          'Bedarfsanalyse und Workflow-Optimierung zur Steigerung der Kundenzufriedenheit.',
-          'Bereichsübergreifende Koordination zwischen Partnern und Teams.',
-          'Einführung von KPI-Dashboards und regelmäßigen Berichten.',
-        ],
+        "de": [
+          "Beaufsichtigung des täglichen Küchenbetriebs und Koordination der Speisenzubereitung.",
+          "Mithilfe bei der Zubereitung von Mahlzeiten und Sicherstellung der Qualitätsstandards für Lebensmittel.",
+          "Unterstützung des Frühstücksservice und Betreuung der Gäste während der Frühstückszeiten.",
+          "Sicherstellung der Einhaltung von Hygiene- und Lebensmittelsicherheitsvorschriften."
+        ]
       },
-      skillsAcquired: ['Gestion de Projet', 'Organisation', 'Relation Client', 'Reporting'],
+      "skillsAcquired": []
     },
     {
-      id: 'exp-2',
-      title: {
-        fr: 'Responsable Relations Partenaires & Accueil Professionnel',
-        en: 'Partner Relations & Professional Reception Lead',
-        ar: 'مسؤولة علاقات الشركاء والاستقبال المهني',
-        de: 'Leiterin Partnerbeziehungen & Professioneller Empfang',
+      "id": "exp-2",
+      "order": 2,
+      "category": "vip_hospitality",
+      "title": {
+        "fr": "Réceptionniste d’hôtel",
+        "en": "Hotel Front Desk Agent",
+        "ar": "موظفة استقبال بالفندق",
+        "de": "Hotelrezeptionistin"
       },
-      company: {
-        fr: 'Centre d’Affaires & Services Internationaux',
-        en: 'Business Center & International Services',
-        ar: 'مركز أعمال وخدمات دولية',
-        de: 'Business Center & Internationale Dienstleistungen',
+      "company": {
+        "fr": "Hospitalité",
+        "en": "Hospitality",
+        "ar": "الضيافة",
+        "de": "Gastgewerbe"
       },
-      location: {
-        fr: 'Tunis, Tunisie',
-        en: 'Tunis, Tunisia',
-        ar: 'تونس العاصمة',
-        de: 'Tunis, Tunesien',
+      "location": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
       },
-      period: {
-        fr: '2018 - 2021',
-        en: '2018 - 2021',
-        ar: '2018 - 2021',
-        de: '2018 - 2021',
+      "period": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
       },
-      order: 2,
-      category: 'vip_hospitality',
-      description: {
-        fr: 'Accueil de délégations d’affaires, gestion des plannings de réunions et relation client de premier ordre.',
-        en: 'Welcoming business delegations, meeting scheduling, and top-tier client relations.',
-        ar: 'استقبال الوفود المهنية وإدارة جداول الاجتماعات وتقديم خدمات راقية للعملاء.',
-        de: 'Betreuung internationaler Geschäftsdelegationen und Terminmanagement auf höchstem Niveau.',
-      },
-      tasks: {
-        fr: [
-          'Accueil personnalisé des délégations et visiteurs institutionnels.',
-          'Gestion des réservations d’espaces, logistique des réunions et visio-conférences.',
-          'Gestion proactive des demandes et résolution efficace des imprévus.',
+      "tasks": {
+        "fr": [
+          "Gestion des arrivées et des départs des clients (check-in / check-out) et attribution des chambres.",
+          "Traitement des réservations, des demandes et des réclamations des clients.",
+          "Coordination avec le service des étages afin de garantir la satisfaction des clients."
         ],
-        en: [
-          'Personalized greeting and protocol assistance for corporate guests.',
-          'Meeting room bookings, conference logistics, and audio-visual setups.',
-          'Proactive issue resolution and high client satisfaction retention.',
+        "en": [
+          "Managed guest check-in, check-out and room assignments.",
+          "Handled reservations, guest requests and complaints.",
+          "Coordinated with housekeeping to ensure guest satisfaction."
         ],
-        ar: [
-          'الاستقبال المتميز لكبار الزوار والوفود والممثلين المؤسساتيين.',
-          'تنظيم حجوزات القاعات واللوجستيات وجلسات العمل والاتصال المرئي.',
-          'المعالجة السريعة والفعالة للطلبات مع ضمان أعلى معايير الجودة.',
+        "ar": [
+          "إدارة تسجيل وصول النزلاء ومغادرتهم وتوزيع الغرف.",
+          "معالجة الحجوزات وطلبات النزلاء وشكاواهم.",
+          "التنسيق مع قسم خدمة الغرف لضمان رضا النزلاء."
         ],
-        de: [
-          'Persönliche Begrüßung von Delegationen und institutionellen Gästen.',
-          'Buchung von Besprechungsräumen und Konferenzlogistik.',
-          'Proaktive Lösung von Anliegen mit höchster Kundenzufriedenheit.',
-        ],
+        "de": [
+          "Abwicklung von Check-in und Check-out der Gäste sowie Zimmerzuteilung.",
+          "Bearbeitung von Reservierungen, Gästewünschen und Beschwerden.",
+          "Abstimmung mit dem Housekeeping zur Sicherstellung der Gästezufriedenheit."
+        ]
       },
-      skillsAcquired: ['Accueil VIP', 'Communication', 'Planification', 'Résolution de Problèmes'],
+      "skillsAcquired": []
     },
+    {
+      "id": "exp-3",
+      "order": 3,
+      "category": "vip_hospitality",
+      "title": {
+        "fr": "Standardiste & Conseillère Clientèle",
+        "en": "Switchboard Operator & Client Advisor",
+        "ar": "عاملة مقسم هاتفي ومستشارة عملاء",
+        "de": "Telefonistin & Kundenberaterin"
+      },
+      "company": {
+        "fr": "Agence de voyages",
+        "en": "Travel Agency",
+        "ar": "وكالة أسفار",
+        "de": "Reisebüro"
+      },
+      "location": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "period": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "tasks": {
+        "fr": [
+          "Gestion d’un volume élevé d’appels et orientation efficace des communications.",
+          "Conseil aux clients sur les offres de voyage, les disponibilités et les tarifs.",
+          "Enregistrement des réservations et suivi des demandes des clients."
+        ],
+        "en": [
+          "Handled high call volumes and routed calls efficiently.",
+          "Advised clients on travel packages, availability and rates.",
+          "Recorded bookings and followed up on client requests."
+        ],
+        "ar": [
+          "التعامل مع عدد كبير من المكالمات وتحويلها بكفاءة.",
+          "تقديم المشورة للعملاء حول العروض السياحية والأماكن المتاحة والأسعار.",
+          "تسجيل الحجوزات ومتابعة طلبات العملاء."
+        ],
+        "de": [
+          "Bearbeitung eines hohen Anrufaufkommens und effiziente Weiterleitung der Anrufe.",
+          "Beratung der Kunden zu Reisepaketen, Verfügbarkeiten und Preisen.",
+          "Erfassung von Buchungen und Nachverfolgung von Kundenanfragen."
+        ]
+      },
+      "skillsAcquired": []
+    },
+    {
+      "id": "exp-4",
+      "order": 4,
+      "category": "medical",
+      "title": {
+        "fr": "Secrétaire médicale",
+        "en": "Medical Secretary",
+        "ar": "سكرتيرة طبية",
+        "de": "Medizinische Sekretärin"
+      },
+      "company": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "location": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "period": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "tasks": {
+        "fr": [
+          "Gestion de l’agenda du médecin et des rendez-vous des patients.",
+          "Tenue des dossiers patients et des dossiers médicaux confidentiels.",
+          "Supervision de l’accueil des patients, de la facturation et des tâches administratives."
+        ],
+        "en": [
+          "Managed the physician’s schedule and patient appointments.",
+          "Maintained confidential patient records and medical files.",
+          "Oversaw patient reception, billing and administrative paperwork."
+        ],
+        "ar": [
+          "إدارة جدول أعمال الطبيب ومواعيد المرضى.",
+          "مسك سجلات المرضى والملفات الطبية مع الحفاظ على سريتها.",
+          "الإشراف على استقبال المرضى والفوترة والأعمال الإدارية."
+        ],
+        "de": [
+          "Verwaltung des Terminkalenders des Arztes und der Patiententermine.",
+          "Führung vertraulicher Patientenakten und medizinischer Unterlagen.",
+          "Verantwortung für Patientenempfang, Abrechnung und Verwaltungsaufgaben."
+        ]
+      },
+      "skillsAcquired": []
+    },
+    {
+      "id": "exp-5",
+      "order": 5,
+      "category": "other",
+      "title": {
+        "fr": "Conseillère de vente",
+        "en": "Sales Advisor",
+        "ar": "مستشارة مبيعات",
+        "de": "Verkaufsberaterin"
+      },
+      "company": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "location": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "period": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "tasks": {
+        "fr": [
+          "Conseil personnalisé pour accompagner les clients dans leurs achats.",
+          "Encaissement des ventes et des paiements, et gestion de la caisse.",
+          "Suivi des niveaux de stock et entretien de la présentation des produits."
+        ],
+        "en": [
+          "Delivered personalized advice to guide customer purchases.",
+          "Processed sales and payments and managed the cash register.",
+          "Monitored stock levels and maintained product displays."
+        ],
+        "ar": [
+          "تقديم نصائح مخصصة لتوجيه العملاء في مشترياتهم.",
+          "إتمام عمليات البيع والدفع وإدارة الصندوق.",
+          "متابعة مستويات المخزون والعناية بعرض المنتجات."
+        ],
+        "de": [
+          "Individuelle Beratung zur Unterstützung der Kunden bei ihren Einkäufen.",
+          "Abwicklung von Verkäufen und Zahlungen sowie Kassenführung.",
+          "Überwachung der Lagerbestände und Pflege der Warenpräsentation."
+        ]
+      },
+      "skillsAcquired": []
+    },
+    {
+      "id": "exp-6",
+      "order": 6,
+      "category": "childcare",
+      "title": {
+        "fr": "Éducatrice – Garde d’enfants",
+        "en": "Childcare Educator",
+        "ar": "مربية أطفال",
+        "de": "Kinderbetreuerin"
+      },
+      "company": {
+        "fr": "Garderie scolaire",
+        "en": "School Daycare",
+        "ar": "حضانة مدرسية",
+        "de": "Schulhort"
+      },
+      "location": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "period": {
+        "fr": "",
+        "en": "",
+        "ar": "",
+        "de": ""
+      },
+      "tasks": {
+        "fr": [
+          "Encadrement des enfants avant et après les heures de classe.",
+          "Planification d’activités éducatives et aide aux devoirs.",
+          "Garantie de la sécurité des enfants et communication régulière avec les parents."
+        ],
+        "en": [
+          "Supervised children before and after school hours.",
+          "Planned educational activities and assisted with homework.",
+          "Ensured child safety and maintained regular communication with parents."
+        ],
+        "ar": [
+          "الإشراف على الأطفال قبل ساعات الدراسة وبعدها.",
+          "تخطيط الأنشطة التعليمية والمساعدة في إنجاز الواجبات المدرسية.",
+          "ضمان سلامة الأطفال والتواصل المنتظم مع الأولياء."
+        ],
+        "de": [
+          "Betreuung der Kinder vor und nach dem Unterricht.",
+          "Planung pädagogischer Aktivitäten und Unterstützung bei den Hausaufgaben.",
+          "Gewährleistung der Sicherheit der Kinder und regelmäßiger Austausch mit den Eltern."
+        ]
+      },
+      "skillsAcquired": []
+    }
   ],
   education: [
     {
-      id: 'edu-1',
-      degree: {
-        fr: 'Master en Gestion & Stratégie des Organisations',
-        en: 'Master in Management & Organizational Strategy',
-        ar: 'ماجستير في التصرف واستراتيجية المنظمات',
-        de: 'Master in Unternehmensführung & Organisationsstrategie',
+      "id": "edu-1795196759734",
+      "order": 1,
+      "type": "diploma",
+      "year": "2009",
+      "degree": {
+        "fr": "Baccalauréat Lettre",
+        "en": "Baccalaureate – Literature",
+        "ar": "باكالوريا آداب",
+        "de": "Abitur – Fachrichtung Literatur"
       },
-      institution: {
-        fr: 'Institut Supérieur de Gestion (ISG)',
-        en: 'Higher Institute of Management',
-        ar: 'المعهد العالي للتصرف',
-        de: 'Höheres Institut für Management',
+      "institution": {
+        "fr": "Lycée Montfleury",
+        "en": "Lycée Montfleury (Montfleury High School)",
+        "ar": "معهد مونفلوري",
+        "de": "Lycée Montfleury (Gymnasium Montfleury)"
       },
-      location: {
-        fr: 'Tunis, Tunisie',
-        en: 'Tunis, Tunisia',
-        ar: 'تونس',
-        de: 'Tunis, Tunesien',
+      "location": {
+        "fr": "Tunis, Tunisie",
+        "en": "Tunis, Tunisia",
+        "ar": "تونس العاصمة، تونس",
+        "de": "Tunis, Tunesien"
       },
-      period: {
-        fr: '2016 - 2018',
-        en: '2016 - 2018',
-        ar: '2016 - 2018',
-        de: '2016 - 2018',
-      },
-      year: '2018',
-      order: 1,
-      type: 'diploma',
-      description: {
-        fr: 'Formation avancée en pilotage organisationnel, gestion des ressources et communication stratégique.',
-        en: 'Advanced studies in organizational management, resource planning, and strategic communications.',
-        ar: 'تكوين متقدم في القيادة التنظيمية، والتخطيط الاستراتيجي والتواصل المؤسساتي.',
-        de: 'Vertiefte Ausbildung in Organisationsmanagement und strategischer Kommunikation.',
-      },
+      "period": {
+        "fr": "2009",
+        "en": "2009",
+        "ar": "2009",
+        "de": "2009"
+      }
     },
     {
-      id: 'edu-2',
-      degree: {
-        fr: 'Licence en Administration des Affaires & Gestion',
-        en: 'Bachelor in Business Administration',
-        ar: 'إجازة في إدارة الأعمال والتصرف',
-        de: 'Bachelor in Betriebswirtschaftslehre',
+      "id": "edu-1795164126355",
+      "order": 2,
+      "type": "certification",
+      "year": "2021",
+      "degree": {
+        "fr": "Formation Professionnelle en Pâtisserie",
+        "en": "Vocational Training in Pastry",
+        "ar": "تكوين مهني في صناعة الحلويات",
+        "de": "Berufsausbildung in Konditorei"
       },
-      institution: {
-        fr: 'Faculté des Sciences Économiques et de Gestion',
-        en: 'Faculty of Economic Sciences and Management',
-        ar: 'كلية العلوم الاقتصادية والتصرف',
-        de: 'Fakultät für Wirtschaftswissenschaften',
+      "institution": {
+        "fr": "Lycée Privé Al Anaka (الأناقة)",
+        "en": "Al Anaka Private High School (الأناقة)",
+        "ar": "المعهد الخاص الأناقة",
+        "de": "Privatgymnasium Al Anaka (الأناقة)"
       },
-      location: {
-        fr: 'Tunis, Tunisie',
-        en: 'Tunis, Tunisia',
-        ar: 'تونس',
-        de: 'Tunis, Tunesien',
+      "location": {
+        "fr": "Tunis, Tunisie",
+        "en": "Tunis, Tunisia",
+        "ar": "تونس العاصمة، تونس",
+        "de": "Tunis, Tunesien"
       },
-      period: {
-        fr: '2013 - 2016',
-        en: '2013 - 2016',
-        ar: '2013 - 2016',
-        de: '2013 - 2016',
-      },
-      year: '2016',
-      order: 2,
-      type: 'academic',
-      description: {
-        fr: 'Fondamentaux de la gestion, négociation commerciale et systèmes d’information.',
-        en: 'Core business administration, commercial negotiation, and management information systems.',
-        ar: 'أسس إدارة المؤسسات والتفاوض التجاري وأنظمة المعلومات.',
-        de: 'Grundlagen der Unternehmensführung und Wirtschaftsinformatik.',
-      },
+      "period": {
+        "fr": "2021",
+        "en": "2021",
+        "ar": "2021",
+        "de": "2021"
+      }
     },
+    {
+      "id": "edu-1795164021814",
+      "order": 3,
+      "type": "certification",
+      "year": "2019",
+      "degree": {
+        "fr": "English Level A1",
+        "en": "English – Level A1",
+        "ar": "اللغة الإنجليزية – المستوى A1",
+        "de": "Englisch – Niveau A1"
+      },
+      "institution": {
+        "fr": "3S Formation",
+        "en": "3S Formation",
+        "ar": "3S Formation",
+        "de": "3S Formation"
+      },
+      "location": {
+        "fr": "Tunis, Tunisie",
+        "en": "Tunis, Tunisia",
+        "ar": "تونس العاصمة، تونس",
+        "de": "Tunis, Tunesien"
+      },
+      "period": {
+        "fr": "2019",
+        "en": "2019",
+        "ar": "2019",
+        "de": "2019"
+      }
+    },
+    {
+      "id": "edu-1",
+      "order": 4,
+      "type": "certification",
+      "year": "2016",
+      "degree": {
+        "fr": "Formation Informatique bureautique",
+        "en": "Office IT Training",
+        "ar": "تكوين في الإعلامية المكتبية",
+        "de": "EDV-Schulung Büroanwendungen"
+      },
+      "institution": {
+        "fr": "3S Formation",
+        "en": "3S Formation",
+        "ar": "3S Formation",
+        "de": "3S Formation"
+      },
+      "location": {
+        "fr": "Tunis, Tunisie",
+        "en": "Tunis, Tunisia",
+        "ar": "تونس العاصمة، تونس",
+        "de": "Tunis, Tunesien"
+      },
+      "period": {
+        "fr": "2016",
+        "en": "2016",
+        "ar": "2016",
+        "de": "2016"
+      }
+    },
+    {
+      "id": "edu-2",
+      "order": 5,
+      "type": "certification",
+      "year": "2016",
+      "degree": {
+        "fr": "Ausbildungszertifikat Deutsche Sprache A1.1",
+        "en": "Training Certificate – German Language A1.1",
+        "ar": "شهادة تكوين في اللغة الألمانية A1.1",
+        "de": "Ausbildungszertifikat Deutsche Sprache A1.1"
+      },
+      "institution": {
+        "fr": "3S Formation",
+        "en": "3S Formation",
+        "ar": "3S Formation",
+        "de": "3S Formation"
+      },
+      "location": {
+        "fr": "Tunis, Tunisie",
+        "en": "Tunis, Tunisia",
+        "ar": "تونس العاصمة، تونس",
+        "de": "Tunis, Tunesien"
+      },
+      "period": {
+        "fr": "2016",
+        "en": "2016",
+        "ar": "2016",
+        "de": "2016"
+      }
+    }
   ],
   skillCategories: [
     {
