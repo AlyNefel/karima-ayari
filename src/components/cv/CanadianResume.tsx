@@ -172,6 +172,19 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
   const page1Experiences = data.experiences.slice(0, 2);
   const page2Experiences = data.experiences.slice(2);
 
+  // CV photo (public path or data URL uploaded from the admin), shown as a circle.
+  const avatarSrc = data.personalInfo.avatarUrl || '';
+  const avatarStyle: React.CSSProperties = {
+    width: '30mm',
+    height: '30mm',
+    borderRadius: '50%',
+    objectFit: 'cover',
+    objectPosition: 'center top',
+    border: '2.5px solid #ffffff',
+    boxShadow: '0 0 0 1.5px #1D4ED8',
+    flexShrink: 0,
+  };
+
   // ─── PDF DOWNLOAD via print window ─────────────────────────────────────────
   // Opens a styled print-ready HTML page in a new window, then triggers
   // window.print(). Browser renders Arabic/RTL perfectly — no canvas glitch.
@@ -189,6 +202,10 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
     const email = data.personalInfo.email ?? 'contact.riahihajer@gmail.com';
     const residence = data.personalInfo.residence?.[lang] ?? 'Tunisie';
     const bio = (data.personalInfo.fullBio?.[lang] || data.personalInfo.bio?.[lang]) ?? '';
+    // The print window is about:blank, so relative paths must be made absolute.
+    const avatarAbs = avatarSrc
+      ? (avatarSrc.startsWith('data:') || /^https?:\/\//.test(avatarSrc) ? avatarSrc : `${window.location.origin}${avatarSrc.startsWith('/') ? '' : '/'}${avatarSrc}`)
+      : '';
 
     const educationHtml = data.education.map(edu => `
       <div style="margin-bottom:6px;line-height:1.3;">
@@ -262,12 +279,15 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
 </head>
 <body>
 <div class="page">
-  <header style="text-align:center;margin-bottom:12px;">
+  <header style="display:flex;align-items:center;justify-content:center;gap:7mm;margin-bottom:12px;">
+    ${avatarAbs ? `<img id="cv-avatar" src="${avatarAbs}" alt="" style="width:30mm;height:30mm;border-radius:50%;object-fit:cover;object-position:center top;border:2.5px solid #fff;box-shadow:0 0 0 1.5px #1D4ED8;flex-shrink:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;"/>` : ''}
+    <div style="text-align:${avatarAbs ? textAlign : 'center'};${avatarAbs ? 'flex:1;' : ''}">
     <h1 style="font-family:${fontFamily};">${name}</h1>
     <div style="font-size:10pt;font-weight:700;direction:ltr;unicode-bidi:isolate;margin-bottom:2px;">${phone}</div>
     <div style="font-size:9.5pt;color:#1D4ED8;font-weight:600;margin-bottom:2px;">${email}</div>
     <div style="font-size:9pt;color:#1D4ED8;text-decoration:underline;margin-bottom:2px;">https://portfolio-hajer.vercel.app</div>
     <div style="font-size:9.5pt;color:#374151;font-weight:500;">${residence}</div>
+    </div>
   </header>
   <section>${sT(labels.about)}<div style="font-size:9pt;line-height:1.4;text-align:justify;"><p style="margin-bottom:4px;">${bio}</p><p style="font-style:italic;color:#4B5563;">${labels.aboutLead}</p></div></section>
   <section style="margin-bottom:8px;"><div style="font-size:9pt;line-height:1.4;"><span style="font-weight:700;">${labels.softSkills} </span><span>${labels.softSkillsText}</span></div></section>
@@ -313,11 +333,15 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
       }, isRtl ? 2000 : 800);
     };
 
-    if ((printWindow.document as any).fonts?.ready) {
-      (printWindow.document as any).fonts.ready.then(triggerPrint);
-    } else {
-      triggerPrint();
-    }
+    const fontsReady: Promise<unknown> = (printWindow.document as any).fonts?.ready ?? Promise.resolve();
+    const avatarImg = printWindow.document.getElementById('cv-avatar') as HTMLImageElement | null;
+    const avatarReady = new Promise<void>((resolve) => {
+      if (!avatarImg || avatarImg.complete) return resolve();
+      avatarImg.onload = () => resolve();
+      avatarImg.onerror = () => resolve();
+      setTimeout(resolve, 4000);
+    });
+    Promise.all([fontsReady, avatarReady]).then(triggerPrint);
   };
 
   const handlePrint = () => window.print();
@@ -423,7 +447,12 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
               className="cv-a4-page shadow-2xl border border-slate-300 text-slate-950"
               style={cvPageStyle}
             >
-              <header className="text-center mb-3">
+              <header className="mb-3" style={{ display: 'flex', alignItems: 'center', gap: '7mm', justifyContent: 'center' }}>
+                {avatarSrc && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={avatarSrc} alt={data.personalInfo.name[lang]} style={avatarStyle} />
+                )}
+                <div style={{ textAlign: avatarSrc ? (isRtl ? 'right' : 'left') : 'center', flex: avatarSrc ? 1 : undefined }}>
                 <h1 style={{ fontSize: '20pt', fontWeight: 900, letterSpacing: 'normal', fontFamily: isRtl ? "'Cairo','Tahoma','Segoe UI',Arial,sans-serif" : 'inherit', lineHeight: '1.25', marginBottom: '4px' }}>
                   {data.personalInfo.name[lang]}
                 </h1>
@@ -438,6 +467,7 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
                 </div>
                 <div style={{ fontSize: '9.5pt', color: '#374151', fontWeight: 500 }}>
                   {data.personalInfo.residence?.[lang]}
+                </div>
                 </div>
               </header>
 

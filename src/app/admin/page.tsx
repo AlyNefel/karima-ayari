@@ -46,6 +46,42 @@ export default function AdminDashboard() {
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [photoError, setPhotoError] = useState<string | null>(null);
+
+  // Reads a photo from the device, center-crops it to a square and downsizes it
+  // to a compact JPEG data URL so it can be stored directly in the database.
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file || !data) return;
+    if (!file.type.startsWith('image/')) {
+      setPhotoError('Veuillez choisir un fichier image (JPG, PNG, WEBP).');
+      return;
+    }
+    setPhotoError(null);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const size = 600;
+        const side = Math.min(img.width, img.height);
+        // Keep the top of portrait photos (face area) rather than the exact center.
+        const sx = (img.width - side) / 2;
+        const sy = img.height > img.width ? Math.min((img.height - side) * 0.15, img.height - side) : (img.height - side) / 2;
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        ctx.drawImage(img, sx, sy, side, side, 0, 0, size, size);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        setData((prev) => (prev ? { ...prev, personalInfo: { ...prev.personalInfo, avatarUrl: dataUrl } } : prev));
+      };
+      img.onerror = () => setPhotoError("Impossible de lire cette image.");
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
 
   useEffect(() => {
     // 1. Verify admin session
@@ -411,6 +447,45 @@ export default function AdminDashboard() {
                   }
                   className="w-full px-3 py-2.5 rounded-xl bg-surface-950 border border-slate-800 text-white text-sm"
                 />
+              </div>
+            </div>
+
+            {/* CV Photo Card */}
+            <div className="p-6 rounded-3xl bg-surface-900 border border-slate-800 space-y-4">
+              <h3 className="text-base font-bold text-white">Photo du CV</h3>
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-slate-700 bg-surface-950 shrink-0 flex items-center justify-center">
+                  {data.personalInfo.avatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={data.personalInfo.avatarUrl} alt="Photo du CV" className="w-full h-full object-cover object-top" />
+                  ) : (
+                    <User className="w-12 h-12 text-slate-600" />
+                  )}
+                </div>
+                <div className="space-y-3 text-center sm:text-start">
+                  <p className="text-xs text-slate-400">
+                    Choisissez une photo depuis votre appareil. Elle est recadrée en carré et affichée en cercle sur le CV et dans le PDF.
+                    Cliquez ensuite sur « Enregistrer » pour la sauvegarder.
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+                    <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm font-bold transition-colors">
+                      <Plus className="w-4 h-4" />
+                      {data.personalInfo.avatarUrl ? 'Changer la photo' : 'Importer une photo'}
+                      <input type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
+                    </label>
+                    {data.personalInfo.avatarUrl && (
+                      <button
+                        type="button"
+                        onClick={() => setData({ ...data, personalInfo: { ...data.personalInfo, avatarUrl: '' } })}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium border border-slate-700 transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Retirer
+                      </button>
+                    )}
+                  </div>
+                  {photoError && <p className="text-xs text-red-400">{photoError}</p>}
+                </div>
               </div>
             </div>
 

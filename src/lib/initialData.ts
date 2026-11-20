@@ -68,7 +68,7 @@ export const initialPortfolioData: PortfolioData = {
       ar: 'تونس / أوروبا / دولياً وعن بُعد',
       de: 'Tunesien / Europa / International & Remote',
     },
-    avatarUrl: '',
+    avatarUrl: '/karima-photo.jpg',
     stats: [
       {
         id: 'stat-1',
