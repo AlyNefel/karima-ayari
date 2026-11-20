@@ -285,7 +285,7 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
     <h1 style="font-family:${fontFamily};">${name}</h1>
     <div style="font-size:10pt;font-weight:700;direction:ltr;unicode-bidi:isolate;margin-bottom:2px;">${phone}</div>
     <div style="font-size:9.5pt;color:#1D4ED8;font-weight:600;margin-bottom:2px;">${email}</div>
-    <div style="font-size:9pt;color:#1D4ED8;text-decoration:underline;margin-bottom:2px;">https://portfolio-hajer.vercel.app</div>
+    <div style="font-size:9pt;color:#1D4ED8;text-decoration:underline;margin-bottom:2px;">https://karima-ayari.vercel.app/</div>
     <div style="font-size:9.5pt;color:#374151;font-weight:500;">${residence}</div>
     </div>
   </header>
@@ -463,7 +463,7 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
                   <a href={`mailto:${data.personalInfo.email}`}>{data.personalInfo.email}</a>
                 </div>
                 <div style={{ fontSize: '9pt', color: '#1D4ED8', textDecoration: 'underline', marginBottom: '2px' }}>
-                  https://portfolio-hajer.vercel.app
+                  https://karima-ayari.vercel.app/
                 </div>
                 <div style={{ fontSize: '9.5pt', color: '#374151', fontWeight: 500 }}>
                   {data.personalInfo.residence?.[lang]}
