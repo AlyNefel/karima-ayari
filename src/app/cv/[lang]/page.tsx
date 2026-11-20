@@ -34,10 +34,10 @@ export default async function CvPage({ params }: Props) {
   };
 
   const headerNotes = {
-    fr: 'Format Canadien Officiel (Exactement 2 Pages A4 • FR)',
-    en: 'Official Canadian Format (Exactly 2 A4 Pages • EN)',
-    ar: 'النموذج الكندي المعتمد (صفحتان A4 بالضبط • AR)',
-    de: 'Offizielles kanadisches Format (Exakt 2 A4-Seiten • DE)',
+    fr: 'Format Canadien Officiel (1 Page A4 • FR)',
+    en: 'Official Canadian Format (1 A4 Page • EN)',
+    ar: 'النموذج الكندي المعتمد (صفحة A4 واحدة • AR)',
+    de: 'Offizielles kanadisches Format (1 A4-Seite • DE)',
   };
 
   return (

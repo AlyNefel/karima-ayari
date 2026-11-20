@@ -271,7 +271,7 @@ export default function AdminDashboard() {
             { id: 'education', label: 'Formations (5)', icon: GraduationCap },
             { id: 'skills', label: 'Compétences & Outils', icon: Wrench },
             { id: 'languages', label: 'Langues (4)', icon: Globe2 },
-            { id: 'cv', label: 'CV Canadien (2 Pages)', icon: FileText },
+            { id: 'cv', label: 'CV Canadien (1 Page)', icon: FileText },
             { id: 'palette', label: 'Palette & Design', icon: Palette },
             { id: 'booking', label: 'Étapes de Réservation', icon: CalendarClock },
           ].map((tab) => {

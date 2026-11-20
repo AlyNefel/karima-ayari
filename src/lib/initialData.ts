@@ -174,60 +174,8 @@ export const initialPortfolioData: PortfolioData = {
       "skillsAcquired": []
     },
     {
-      "id": "exp-2",
-      "order": 2,
-      "category": "vip_hospitality",
-      "title": {
-        "fr": "Réceptionniste d’hôtel",
-        "en": "Hotel Front Desk Agent",
-        "ar": "موظفة استقبال بالفندق",
-        "de": "Hotelrezeptionistin"
-      },
-      "company": {
-        "fr": "Hospitalité",
-        "en": "Hospitality",
-        "ar": "الضيافة",
-        "de": "Gastgewerbe"
-      },
-      "location": {
-        "fr": "",
-        "en": "",
-        "ar": "",
-        "de": ""
-      },
-      "period": {
-        "fr": "",
-        "en": "",
-        "ar": "",
-        "de": ""
-      },
-      "tasks": {
-        "fr": [
-          "Gestion des arrivées et des départs des clients (check-in / check-out) et attribution des chambres.",
-          "Traitement des réservations, des demandes et des réclamations des clients.",
-          "Coordination avec le service des étages afin de garantir la satisfaction des clients."
-        ],
-        "en": [
-          "Managed guest check-in, check-out and room assignments.",
-          "Handled reservations, guest requests and complaints.",
-          "Coordinated with housekeeping to ensure guest satisfaction."
-        ],
-        "ar": [
-          "إدارة تسجيل وصول النزلاء ومغادرتهم وتوزيع الغرف.",
-          "معالجة الحجوزات وطلبات النزلاء وشكاواهم.",
-          "التنسيق مع قسم خدمة الغرف لضمان رضا النزلاء."
-        ],
-        "de": [
-          "Abwicklung von Check-in und Check-out der Gäste sowie Zimmerzuteilung.",
-          "Bearbeitung von Reservierungen, Gästewünschen und Beschwerden.",
-          "Abstimmung mit dem Housekeeping zur Sicherstellung der Gästezufriedenheit."
-        ]
-      },
-      "skillsAcquired": []
-    },
-    {
       "id": "exp-3",
-      "order": 3,
+      "order": 2,
       "category": "vip_hospitality",
       "title": {
         "fr": "Standardiste & Conseillère Clientèle",
@@ -279,7 +227,7 @@ export const initialPortfolioData: PortfolioData = {
     },
     {
       "id": "exp-4",
-      "order": 4,
+      "order": 3,
       "category": "medical",
       "title": {
         "fr": "Secrétaire médicale",
@@ -331,7 +279,7 @@ export const initialPortfolioData: PortfolioData = {
     },
     {
       "id": "exp-5",
-      "order": 5,
+      "order": 4,
       "category": "other",
       "title": {
         "fr": "Conseillère de vente",
@@ -383,7 +331,7 @@ export const initialPortfolioData: PortfolioData = {
     },
     {
       "id": "exp-6",
-      "order": 6,
+      "order": 5,
       "category": "childcare",
       "title": {
         "fr": "Éducatrice – Garde d’enfants",

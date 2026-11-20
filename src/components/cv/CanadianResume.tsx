@@ -19,7 +19,6 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
   showControls = true,
 }) => {
   const [downloading, setDownloading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'both' | 'p1' | 'p2'>('both');
   const t = translations[lang];
 
   const isRtl = lang === 'ar';
@@ -34,7 +33,7 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
       experience: 'EXPERIENCES PROFESSIONNELLES ET STAGES',
       engagements: 'ENGAGEMENTS ET ATTESTATIONS PROFESSIONNELLES',
       languages: 'LANGUES',
-      page1: 'Page 1 sur 2',
+      page1: 'Page unique (A4)',
       page2: 'Page 2 sur 2',
       page1Footer: '1 / 2',
       page2Footer: '2 / 2',
@@ -57,7 +56,7 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
         { name: 'Anglais', level: 'Niveau débutant (A1)' },
       ],
       bannerNote: 'Pour une qualité optimale du PDF : cliquez sur Imprimer → Enregistrer en PDF dans votre navigateur.',
-      btnDownload: 'Télécharger PDF (2 Pages A4)',
+      btnDownload: 'Télécharger PDF (1 Page A4)',
       btnGenerating: 'Génération en cours...',
       btnPrint: 'Imprimer / Enregistrer PDF',
     },
@@ -69,7 +68,7 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
       experience: 'PROFESSIONAL EXPERIENCE',
       engagements: 'COMMENDATIONS & PROFESSIONAL REFERENCES',
       languages: 'LANGUAGES',
-      page1: 'Page 1 of 2',
+      page1: 'Single page (A4)',
       page2: 'Page 2 of 2',
       page1Footer: '1 / 2',
       page2Footer: '2 / 2',
@@ -92,7 +91,7 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
         { name: 'English', level: 'Beginner in progress (A1)' },
       ],
       bannerNote: 'For best PDF quality: click Print → Save as PDF in your browser.',
-      btnDownload: 'Download PDF (2 A4 Pages)',
+      btnDownload: 'Download PDF (1 A4 Page)',
       btnGenerating: 'Generating...',
       btnPrint: 'Print / Save as PDF',
     },
@@ -104,7 +103,7 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
       experience: 'BERUFSERFAHRUNG',
       engagements: 'REFERENZEN & PROFESSIONELLE ZEUGNISSE',
       languages: 'SPRACHKENNTNISSE',
-      page1: 'Seite 1 von 2',
+      page1: 'Einzelseite (A4)',
       page2: 'Seite 2 von 2',
       page1Footer: '1 / 2',
       page2Footer: '2 / 2',
@@ -127,7 +126,7 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
         { name: 'Englisch', level: 'Grundkenntnisse / Anfänger (A1)' },
       ],
       bannerNote: 'Für beste PDF-Qualität: Drucken → Als PDF speichern im Browser verwenden.',
-      btnDownload: 'PDF herunterladen (2 A4-Seiten)',
+      btnDownload: 'PDF herunterladen (1 A4-Seite)',
       btnGenerating: 'Wird generiert...',
       btnPrint: 'Drucken / Als PDF speichern',
     },
@@ -139,7 +138,7 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
       experience: '\u0627\u0644\u062e\u0628\u0631\u0627\u062a \u0627\u0644\u0645\u0647\u0646\u064a\u0629 \u0648\u0627\u0644\u062a\u0631\u0628\u0635\u0627\u062a',
       engagements: '\u0627\u0644\u0634\u0647\u0627\u062f\u0627\u062a \u0648\u0627\u0644\u0645\u0631\u0627\u062c\u0639 \u0627\u0644\u0645\u0647\u0646\u064a\u0629',
       languages: '\u0627\u0644\u0644\u063a\u0627\u062a \u0627\u0644\u0645\u062a\u0642\u0646\u0629',
-      page1: '\u0627\u0644\u0635\u0641\u062d\u0629 1 \u0645\u0646 2',
+      page1: 'صفحة واحدة (A4)',
       page2: '\u0627\u0644\u0635\u0641\u062d\u0629 2 \u0645\u0646 2',
       page1Footer: '\u0661 / \u0662',
       page2Footer: '\u0662 / \u0662',
@@ -162,150 +161,87 @@ export const CanadianResume: React.FC<CanadianResumeProps> = ({
         { name: 'الإنجليزية', level: 'المستوى الابتدائي قيد التطوير (A1)' },
       ],
       bannerNote: 'للحصول على أفضل جودة PDF: انقر على طباعة ← حفظ كـ PDF في متصفحك.',
-      btnDownload: 'تحميل ملف PDF (صفحتان A4)',
+      btnDownload: 'تحميل ملف PDF (صفحة A4 واحدة)',
       btnGenerating: 'جاري الإعداد...',
       btnPrint: 'طباعة / حفظ كـ PDF',
     },
   }[lang];
 
-  // Page 1: first 2 recent experiences; Page 2: remaining
-  const page1Experiences = data.experiences.slice(0, 2);
-  const page2Experiences = data.experiences.slice(2);
+  // Single A4 page: everything is laid out on one page, and the content is
+  // scaled down slightly (zoom) when a language's text would overflow it.
+  const pageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [fitZoom, setFitZoom] = useState(1);
+
+  // Returns the zoom factor (<= 1) that makes `content` fit inside `page`.
+  const computeFitZoom = (page: HTMLElement, content: HTMLElement) => {
+    const win = page.ownerDocument.defaultView || window;
+    const cs = win.getComputedStyle(page);
+    const available = page.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const previous = content.style.zoom;
+    content.style.zoom = '1';
+    const natural = content.getBoundingClientRect().height;
+    content.style.zoom = previous;
+    if (!natural || natural <= available) return 1;
+    return Math.max(0.7, Math.floor((available / natural) * 1000) / 1000);
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    const refit = () => {
+      if (cancelled || !pageRef.current || !contentRef.current) return;
+      setFitZoom(computeFitZoom(pageRef.current, contentRef.current));
+    };
+    refit();
+    document.fonts?.ready.then(refit);
+    const img = contentRef.current?.querySelector('img');
+    if (img && !img.complete) img.addEventListener('load', refit, { once: true });
+    return () => {
+      cancelled = true;
+    };
+  }, [data, lang]);
 
   // CV photo (public path or data URL uploaded from the admin), shown as a circle.
   const avatarSrc = data.personalInfo.avatarUrl || '';
   const avatarStyle: React.CSSProperties = {
-    width: '30mm',
-    height: '30mm',
+    width: '26mm',
+    height: '26mm',
     borderRadius: '50%',
     objectFit: 'cover',
     objectPosition: 'center top',
     border: '2.5px solid #ffffff',
     boxShadow: '0 0 0 1.5px #1D4ED8',
     flexShrink: 0,
-  };
+    WebkitPrintColorAdjust: 'exact',
+    printColorAdjust: 'exact',
+  } as React.CSSProperties;
 
   // ─── PDF DOWNLOAD via print window ─────────────────────────────────────────
-  // Opens a styled print-ready HTML page in a new window, then triggers
-  // window.print(). Browser renders Arabic/RTL perfectly — no canvas glitch.
+  // Copies the on-screen A4 page into a clean print window and triggers
+  // window.print(), so the PDF is exactly what the preview shows (1 page).
   const handleDownloadPdf = () => {
+    const page = pageRef.current;
+    if (!page) return;
     setDownloading(true);
 
-    const fontFamily = isRtl
-      ? "'Cairo', 'Tahoma', 'Segoe UI', Arial, sans-serif"
-      : "'Calibri', Arial, Helvetica, sans-serif";
-    const direction = isRtl ? 'rtl' : 'ltr';
-    const textAlign = isRtl ? 'right' : 'left';
-
-    const name = data.personalInfo.name[lang] ?? 'Hajer Riahi';
-    const phone = data.personalInfo.phone ?? '+216 52 784 629';
-    const email = data.personalInfo.email ?? 'contact.riahihajer@gmail.com';
-    const residence = data.personalInfo.residence?.[lang] ?? 'Tunisie';
-    const bio = (data.personalInfo.fullBio?.[lang] || data.personalInfo.bio?.[lang]) ?? '';
-    // The print window is about:blank, so relative paths must be made absolute.
-    const avatarAbs = avatarSrc
-      ? (avatarSrc.startsWith('data:') || /^https?:\/\//.test(avatarSrc) ? avatarSrc : `${window.location.origin}${avatarSrc.startsWith('/') ? '' : '/'}${avatarSrc}`)
-      : '';
-
-    const educationHtml = data.education.map(edu => `
-      <div style="margin-bottom:6px;line-height:1.3;">
-        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:8.5pt;">
-          <span>${edu.degree[lang] ?? ''}</span>
-          <span dir="ltr">[${edu.period[lang] ?? ''}]</span>
-        </div>
-        <div style="color:#374151;font-weight:600;">${edu.institution[lang] ?? ''} - ${edu.location[lang] ?? ''}</div>
-        ${edu.description ? `<div style="color:#6B7280;font-style:italic;font-size:8pt;">(${edu.description[lang] ?? ''})</div>` : ''}
-      </div>
-    `).join('');
-
-    const buildExpHtml = (exps: typeof data.experiences) => exps.map(exp => `
-      <div style="margin-bottom:10px;line-height:1.3;font-size:8.5pt;">
-        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:9pt;color:#111827;">
-          <span>${exp.title[lang] ?? ''}</span>
-          ${exp.period?.[lang] ? `<span dir="ltr" style="white-space:nowrap;">[${exp.period[lang]}]</span>` : ''}
-        </div>
-        ${[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).length ? `<div style="color:#374151;font-weight:600;margin-bottom:3px;">&bull; ${[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).join(' - ')}</div>` : ''}
-        <ul style="margin:0;padding-${isRtl ? 'right' : 'left'}:8px;color:#1F2937;list-style:none;">
-          ${(exp.tasks[lang] ?? []).map(task => `<li style="margin-bottom:2px;">&bull; ${task}</li>`).join('')}
-        </ul>
-      </div>
-    `).join('');
-
-    const techColsHtml = labels.techSkillsCols.map(col => `
-      <div>
-        <ul style="margin:0;padding:0;list-style:none;">
-          ${col.map(item => `<li style="margin-bottom:2px;">${item}</li>`).join('')}
-        </ul>
-      </div>
-    `).join('');
-
-    const engagementsHtml = labels.engagementsList.map(item => `
-      <div style="margin-bottom:4px;line-height:1.3;">
-        <span style="font-weight:700;">${item.label}</span><span>${item.text}</span>
-      </div>
-    `).join('');
-
-    const languagesHtml = labels.languagesList.map(item => `
-      <div style="margin-bottom:3px;line-height:1.4;">
-        <span style="font-weight:700;">&bull; ${item.name} : </span><span>${item.level}</span>
-      </div>
-    `).join('');
-
-    const sT = (txt: string) => `<h2 style="font-size:11pt;font-weight:700;text-transform:uppercase;border-bottom:1.5px solid #111827;padding-bottom:2px;margin:0 0 6px 0;letter-spacing:${isRtl ? '0' : '0.04em'};">${txt}</h2>`;
-
     const htmlContent = `<!DOCTYPE html>
-<html lang="${lang}" dir="${direction}">
+<html lang="${lang}" dir="${isRtl ? 'rtl' : 'ltr'}">
 <head>
 <meta charset="UTF-8"/>
+<base href="${window.location.origin}/"/>
 <title>CV_Karima_Ayari_${lang.toUpperCase()}</title>
 ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>` : ''}
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{font-family:${fontFamily};font-size:10pt;color:#111827;background:#fff;direction:${direction};text-align:${textAlign};}
-  .page{width:210mm;min-height:297mm;max-height:297mm;padding:13mm 16mm 10mm 16mm;box-sizing:border-box;overflow:hidden;page-break-after:always;position:relative;background:#fff;}
-  .page:last-child{page-break-after:auto;}
-  h1{font-size:20pt;font-weight:900;letter-spacing:normal;line-height:1.2;margin-bottom:4px;}
-  .footer{position:absolute;bottom:8px;${isRtl ? 'left' : 'right'}:16mm;font-size:7.5pt;color:#9CA3AF;}
-  section{margin-bottom:10px;}
-  @media print{
-    html,body{margin:0;padding:0;}
-    .page{margin:0;box-shadow:none;border:none;page-break-after:always;}
-    .page:last-child{page-break-after:auto;}
-    @page{size:A4 portrait;margin:0;}
-  }
+  html,body{background:#fff;color:#111827;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  @page{size:A4 portrait;margin:0;}
 </style>
 </head>
-<body>
-<div class="page">
-  <header style="display:flex;align-items:center;justify-content:center;gap:7mm;margin-bottom:12px;">
-    ${avatarAbs ? `<img id="cv-avatar" src="${avatarAbs}" alt="" style="width:30mm;height:30mm;border-radius:50%;object-fit:cover;object-position:center top;border:2.5px solid #fff;box-shadow:0 0 0 1.5px #1D4ED8;flex-shrink:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;"/>` : ''}
-    <div style="text-align:${avatarAbs ? textAlign : 'center'};${avatarAbs ? 'flex:1;' : ''}">
-    <h1 style="font-family:${fontFamily};">${name}</h1>
-    <div style="font-size:10pt;font-weight:700;direction:ltr;unicode-bidi:isolate;margin-bottom:2px;">${phone}</div>
-    <div style="font-size:9.5pt;color:#1D4ED8;font-weight:600;margin-bottom:2px;">${email}</div>
-    <div style="font-size:9pt;color:#1D4ED8;text-decoration:underline;margin-bottom:2px;">https://karima-ayari.vercel.app/</div>
-    <div style="font-size:9.5pt;color:#374151;font-weight:500;">${residence}</div>
-    </div>
-  </header>
-  <section>${sT(labels.about)}<div style="font-size:9pt;line-height:1.4;text-align:justify;"><p style="margin-bottom:4px;">${bio}</p><p style="font-style:italic;color:#4B5563;">${labels.aboutLead}</p></div></section>
-  <section style="margin-bottom:8px;"><div style="font-size:9pt;line-height:1.4;"><span style="font-weight:700;">${labels.softSkills} </span><span>${labels.softSkillsText}</span></div></section>
-  <section>
-    <div style="font-weight:700;font-size:9pt;margin-bottom:4px;">${labels.techSkills}</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;font-size:8.5pt;">${techColsHtml}</div>
-  </section>
-  <section>${sT(labels.education)}<div style="font-size:8.5pt;">${educationHtml}</div></section>
-  <section style="margin-bottom:0;">${sT(labels.experience)}<div style="font-size:8.5pt;">${buildExpHtml(page1Experiences)}</div></section>
-  <div class="footer">${labels.page1Footer}</div>
-</div>
-<div class="page">
-  <section><div style="font-size:8.5pt;">${buildExpHtml(page2Experiences)}</div></section>
-  <section>${sT(labels.engagements)}<div style="font-size:8.5pt;">${engagementsHtml}</div></section>
-  <section>${sT(labels.languages)}<div style="font-size:8.5pt;color:#111827;">${languagesHtml}</div></section>
-  <div class="footer">${labels.page2Footer}</div>
-</div>
-</body>
+<body>${page.outerHTML}</body>
 </html>`;
 
     const printWindow = window.open('', '_blank', 'width=900,height=700');
@@ -326,6 +262,10 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
 
     const triggerPrint = () => {
       setTimeout(() => {
+        // Re-fit with the print window's own fonts before printing.
+        const p = printWindow.document.getElementById('cv-page-1');
+        const c = printWindow.document.getElementById('cv-content');
+        if (p && c) c.style.zoom = String(computeFitZoom(p, c));
         printWindow.focus();
         printWindow.print();
         printWindow.onafterprint = () => printWindow.close();
@@ -334,7 +274,7 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
     };
 
     const fontsReady: Promise<unknown> = (printWindow.document as any).fonts?.ready ?? Promise.resolve();
-    const avatarImg = printWindow.document.getElementById('cv-avatar') as HTMLImageElement | null;
+    const avatarImg = printWindow.document.querySelector('#cv-content img') as HTMLImageElement | null;
     const avatarReady = new Promise<void>((resolve) => {
       if (!avatarImg || avatarImg.complete) return resolve();
       avatarImg.onload = () => resolve();
@@ -368,9 +308,11 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
     textTransform: 'uppercase',
     borderBottom: '1.5px solid #111827',
     paddingBottom: '2px',
-    marginBottom: '6px',
+    marginBottom: '4px',
     letterSpacing: isRtl ? '0px' : '0.04em',
   };
+
+  const sectionStyle: React.CSSProperties = { marginBottom: '8px' };
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -395,18 +337,6 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
                 ))}
               </div>
             )}
-          </div>
-
-          <div className="flex sm:hidden items-center gap-1 bg-slate-800 rounded-lg p-1 border border-slate-700">
-            {(['both', 'p1', 'p2'] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-2.5 py-1 text-xs rounded-md font-semibold ${activeTab === tab ? 'bg-amber-500 text-slate-950' : 'text-slate-300'}`}
-              >
-                {tab === 'both' ? (lang === 'ar' ? 'الكل' : lang === 'de' ? 'Alle' : 'Tout') : tab === 'p1' ? (lang === 'ar' ? 'ص١' : lang === 'de' ? 'S.1' : 'P.1') : (lang === 'ar' ? 'ص٢' : lang === 'de' ? 'S.2' : 'P.2')}
-              </button>
-            ))}
           </div>
 
           <div className="flex items-center gap-2">
@@ -436,82 +366,81 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
       </div>
 
       <div className="w-full overflow-x-auto flex flex-col items-center gap-8 pb-12">
-
-        {/* PAGE 1 */}
-        {(activeTab === 'both' || activeTab === 'p1') && (
-          <div className="flex flex-col items-center">
-            <div className="no-print text-xs font-bold text-amber-400 mb-2 self-start">📄 {labels.page1}</div>
-            <div
-              id="cv-page-1"
-              dir={isRtl ? 'rtl' : 'ltr'}
-              className="cv-a4-page shadow-2xl border border-slate-300 text-slate-950"
-              style={cvPageStyle}
-            >
-              <header className="mb-3" style={{ display: 'flex', alignItems: 'center', gap: '7mm', justifyContent: 'center' }}>
+        <div className="flex flex-col items-center">
+          <div className="no-print text-xs font-bold text-amber-400 mb-2 self-start">📄 {labels.page1}</div>
+          <div
+            id="cv-page-1"
+            ref={pageRef}
+            dir={isRtl ? 'rtl' : 'ltr'}
+            className="cv-a4-page shadow-2xl border border-slate-300 text-slate-950"
+            style={cvPageStyle}
+          >
+            <div id="cv-content" ref={contentRef} style={{ zoom: fitZoom }}>
+              <header style={{ display: 'flex', alignItems: 'center', gap: '6mm', justifyContent: 'center', marginBottom: '9px' }}>
                 {avatarSrc && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={avatarSrc} alt={data.personalInfo.name[lang]} style={avatarStyle} />
                 )}
                 <div style={{ textAlign: avatarSrc ? (isRtl ? 'right' : 'left') : 'center', flex: avatarSrc ? 1 : undefined }}>
-                <h1 style={{ fontSize: '20pt', fontWeight: 900, letterSpacing: 'normal', fontFamily: isRtl ? "'Cairo','Tahoma','Segoe UI',Arial,sans-serif" : 'inherit', lineHeight: '1.25', marginBottom: '4px' }}>
-                  {data.personalInfo.name[lang]}
-                </h1>
-                <div style={{ fontSize: '10pt', fontWeight: 700, direction: 'ltr', unicodeBidi: 'isolate', marginBottom: '2px' }}>
-                  {data.personalInfo.phone}
-                </div>
-                <div style={{ fontSize: '9.5pt', color: '#1D4ED8', fontWeight: 600, marginBottom: '2px' }}>
-                  <a href={`mailto:${data.personalInfo.email}`}>{data.personalInfo.email}</a>
-                </div>
-                <div style={{ fontSize: '9pt', color: '#1D4ED8', textDecoration: 'underline', marginBottom: '2px' }}>
-                  https://karima-ayari.vercel.app/
-                </div>
-                <div style={{ fontSize: '9.5pt', color: '#374151', fontWeight: 500 }}>
-                  {data.personalInfo.residence?.[lang]}
-                </div>
+                  <h1 style={{ fontSize: '20pt', fontWeight: 900, letterSpacing: 'normal', fontFamily: isRtl ? "'Cairo','Tahoma','Segoe UI',Arial,sans-serif" : 'inherit', lineHeight: '1.2', marginBottom: '3px' }}>
+                    {data.personalInfo.name[lang]}
+                  </h1>
+                  <div style={{ fontSize: '10pt', fontWeight: 700, direction: 'ltr', unicodeBidi: 'isolate', marginBottom: '1px' }}>
+                    {data.personalInfo.phone}
+                  </div>
+                  <div style={{ fontSize: '9.5pt', color: '#1D4ED8', fontWeight: 600, marginBottom: '1px' }}>
+                    <a href={`mailto:${data.personalInfo.email}`}>{data.personalInfo.email}</a>
+                  </div>
+                  <div style={{ fontSize: '9pt', color: '#1D4ED8', textDecoration: 'underline', marginBottom: '1px' }}>
+                    https://karima-ayari.vercel.app/
+                  </div>
+                  <div style={{ fontSize: '9.5pt', color: '#374151', fontWeight: 500 }}>
+                    {data.personalInfo.residence?.[lang]}
+                  </div>
                 </div>
               </header>
 
-              <section className="mb-3">
+              <section style={sectionStyle}>
                 <h2 style={sectionHeaderStyle}>{labels.about}</h2>
-                <div style={{ fontSize: '9pt', color: '#111827', lineHeight: '1.4', textAlign: 'justify' }}>
-                  <p style={{ marginBottom: '4px' }}>{data.personalInfo.fullBio?.[lang] || data.personalInfo.bio?.[lang]}</p>
+                <div style={{ fontSize: '9pt', color: '#111827', lineHeight: '1.35', textAlign: 'justify' }}>
+                  <p style={{ marginBottom: '3px' }}>{data.personalInfo.fullBio?.[lang] || data.personalInfo.bio?.[lang]}</p>
                   <p style={{ fontStyle: 'italic', color: '#4B5563' }}>{labels.aboutLead}</p>
                 </div>
               </section>
 
-              <section className="mb-2.5">
-                <div style={{ fontSize: '9pt', lineHeight: '1.4' }}>
+              <section style={{ marginBottom: '6px' }}>
+                <div style={{ fontSize: '9pt', lineHeight: '1.35' }}>
                   <span style={{ fontWeight: 700 }}>{labels.softSkills} </span>
                   <span style={{ color: '#111827' }}>{labels.softSkillsText}</span>
                 </div>
               </section>
 
-              <section className="mb-3">
-                <div style={{ fontWeight: 700, fontSize: '9pt', marginBottom: '4px' }}>{labels.techSkills}</div>
-                <div className="grid grid-cols-3 gap-2" style={{ fontSize: '8.5pt', color: '#111827' }}>
+              <section style={sectionStyle}>
+                <div style={{ fontWeight: 700, fontSize: '9pt', marginBottom: '3px' }}>{labels.techSkills}</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '6px', fontSize: '8.5pt', color: '#111827' }}>
                   {labels.techSkillsCols.map((col, cIdx) => (
-                    <div key={cIdx}>
-                      <ul style={{ listStyle: 'none', padding: 0 }}>
-                        {col.map((item, itemIdx) => (
-                          <li key={itemIdx} style={{ marginBottom: '2px' }}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
+                    <ul key={cIdx} style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                      {col.map((item, itemIdx) => (
+                        <li key={itemIdx} style={{ marginBottom: '1px' }}>{item}</li>
+                      ))}
+                    </ul>
                   ))}
                 </div>
               </section>
 
-              <section className="mb-3">
+              <section style={sectionStyle}>
                 <h2 style={sectionHeaderStyle}>{labels.education}</h2>
-                <div style={{ fontSize: '8.5pt' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: '8mm', rowGap: '5px', fontSize: '8.5pt' }}>
                   {data.education.map((edu) => (
-                    <div key={edu.id} style={{ marginBottom: '6px', lineHeight: '1.3' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700 }}>
+                    <div key={edu.id} style={{ lineHeight: '1.3' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '6px', fontWeight: 700 }}>
                         <span>{edu.degree[lang]}</span>
                         <span dir="ltr" style={{ whiteSpace: 'nowrap' }}>[{edu.period[lang]}]</span>
                       </div>
-                      <div style={{ color: '#374151', fontWeight: 600 }}>{edu.institution[lang]} - {edu.location[lang]}</div>
-                      {edu.description && (
+                      <div style={{ color: '#374151', fontWeight: 600 }}>
+                        {[edu.institution?.[lang], edu.location?.[lang]].filter(Boolean).join(' - ')}
+                      </div>
+                      {edu.description?.[lang] && (
                         <div style={{ color: '#6B7280', fontStyle: 'italic', fontSize: '8pt' }}>({edu.description[lang]})</div>
                       )}
                     </div>
@@ -519,19 +448,21 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
                 </div>
               </section>
 
-              <section className="mb-2">
+              <section style={sectionStyle}>
                 <h2 style={sectionHeaderStyle}>{labels.experience}</h2>
                 <div style={{ fontSize: '8.5pt' }}>
-                  {page1Experiences.map((exp) => (
-                    <div key={exp.id} style={{ marginBottom: '8px', lineHeight: '1.3' }}>
+                  {data.experiences.map((exp) => (
+                    <div key={exp.id} style={{ marginBottom: '6px', lineHeight: '1.3' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '9pt' }}>
-                        <span>{exp.title[lang]}</span>
+                        <span>
+                          {exp.title[lang]}
+                          {exp.company?.[lang] && (
+                            <span style={{ color: '#374151', fontWeight: 600 }}> — {[exp.company[lang], exp.location?.[lang]].filter(Boolean).join(', ')}</span>
+                          )}
+                        </span>
                         {exp.period?.[lang] && <span dir="ltr" style={{ whiteSpace: 'nowrap' }}>[{exp.period[lang]}]</span>}
                       </div>
-                      {[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).length > 0 && (
-                        <div style={{ color: '#374151', fontWeight: 600, marginBottom: '2px' }}>• {[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).join(' - ')}</div>
-                      )}
-                      <ul style={{ listStyle: 'none', padding: 0, paddingInlineStart: '8px', color: '#1F2937' }}>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, paddingInlineStart: '8px', color: '#1F2937' }}>
                         {exp.tasks[lang]?.map((task, tIdx) => (
                           <li key={tIdx} style={{ marginBottom: '1px' }}>• {task}</li>
                         ))}
@@ -541,74 +472,33 @@ ${isRtl ? `<link rel="preconnect" href="https://fonts.googleapis.com"/>
                 </div>
               </section>
 
-              <div style={{ position: 'absolute', bottom: '8px', [isRtl ? 'left' : 'right']: '16mm', fontSize: '7.5pt', color: '#9CA3AF' }}>
-                {labels.page1Footer}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* PAGE 2 */}
-        {(activeTab === 'both' || activeTab === 'p2') && (
-          <div className="flex flex-col items-center">
-            <div className="no-print text-xs font-bold text-amber-400 mb-2 self-start">📄 {labels.page2}</div>
-            <div
-              id="cv-page-2"
-              dir={isRtl ? 'rtl' : 'ltr'}
-              className="cv-a4-page cv-page-2 shadow-2xl border border-slate-300 text-slate-950"
-              style={cvPageStyle}
-            >
-              <section className="mb-4">
-                <div style={{ fontSize: '8.5pt' }}>
-                  {page2Experiences.map((exp) => (
-                    <div key={exp.id} style={{ marginBottom: '10px', lineHeight: '1.3' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '9pt' }}>
-                        <span>{exp.title[lang]}</span>
-                        {exp.period?.[lang] && <span dir="ltr" style={{ whiteSpace: 'nowrap' }}>[{exp.period[lang]}]</span>}
+              <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', columnGap: '8mm' }}>
+                <section>
+                  <h2 style={sectionHeaderStyle}>{labels.engagements}</h2>
+                  <div style={{ fontSize: '8.5pt', color: '#111827' }}>
+                    {labels.engagementsList.map((item, idx) => (
+                      <div key={idx} style={{ marginBottom: '3px', lineHeight: '1.3' }}>
+                        <span style={{ fontWeight: 700 }}>{item.label}</span>
+                        <span>{item.text}</span>
                       </div>
-                      {[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).length > 0 && (
-                        <div style={{ color: '#374151', fontWeight: 600, marginBottom: '3px' }}>• {[exp.company?.[lang], exp.location?.[lang]].filter(Boolean).join(' - ')}</div>
-                      )}
-                      <ul style={{ listStyle: 'none', padding: 0, paddingInlineStart: '8px', color: '#1F2937' }}>
-                        {exp.tasks[lang]?.map((task, tIdx) => (
-                          <li key={tIdx} style={{ marginBottom: '2px' }}>• {task}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <section className="mb-4">
-                <h2 style={sectionHeaderStyle}>{labels.engagements}</h2>
-                <div style={{ fontSize: '8.5pt', color: '#111827' }}>
-                  {labels.engagementsList.map((item, idx) => (
-                    <div key={idx} style={{ marginBottom: '4px', lineHeight: '1.3' }}>
-                      <span style={{ fontWeight: 700 }}>{item.label}</span>
-                      <span>{item.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <section className="mb-4">
-                <h2 style={sectionHeaderStyle}>{labels.languages}</h2>
-                <div style={{ fontSize: '8.5pt', color: '#111827' }}>
-                  {labels.languagesList.map((item, idx) => (
-                    <div key={idx} style={{ marginBottom: '3px', lineHeight: '1.4' }}>
-                      <span style={{ fontWeight: 700 }}>• {item.name} : </span>
-                      <span>{item.level}</span>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <div style={{ position: 'absolute', bottom: '8px', [isRtl ? 'left' : 'right']: '16mm', fontSize: '7.5pt', color: '#9CA3AF' }}>
-                {labels.page2Footer}
+                    ))}
+                  </div>
+                </section>
+                <section>
+                  <h2 style={sectionHeaderStyle}>{labels.languages}</h2>
+                  <div style={{ fontSize: '8.5pt', color: '#111827' }}>
+                    {labels.languagesList.map((item, idx) => (
+                      <div key={idx} style={{ marginBottom: '2px', lineHeight: '1.35' }}>
+                        <span style={{ fontWeight: 700 }}>• {item.name} : </span>
+                        <span>{item.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
